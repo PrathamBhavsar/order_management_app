@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import '../../models/api_response.dart';
+import '../../data/models/api_response.dart';
 import 'package:flutter/material.dart';
 import 'api_endpoints.dart';
 

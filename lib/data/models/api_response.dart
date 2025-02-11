@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import '../service/log_service.dart';
+import '../../service/log_service.dart';
 
 class ApiResponse<T> {
   final bool success;

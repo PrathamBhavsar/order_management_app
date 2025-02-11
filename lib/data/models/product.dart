@@ -1,4 +1,4 @@
-import '../utils/date_util.dart';
+import '../../utils/date_util.dart';
 
 class Product {
   final int id;
