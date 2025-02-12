@@ -15,6 +15,7 @@ import 'data/repositories/customer_repository.dart';
 import 'presentation/providers/order_provider.dart';
 import 'presentation/providers/product_provider.dart';
 import 'presentation/screens/order_details_screen.dart';
+import 'presentation/screens/signature_screen.dart';
 import 'presentation/screens/splash/splash_screen.dart';
 
 void main() {
@@ -95,7 +96,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
           debugShowCheckedModeBanner: false,
-          home: SplashScreen(),
+          home: SignatureScreen(),
         ),
       );
 }

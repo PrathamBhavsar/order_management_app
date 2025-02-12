@@ -4,6 +4,8 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:typed_data';
 import 'dart:io';
 
+import '../../core/extensions/app_paddings.dart';
+
 class SignatureScreen extends StatefulWidget {
   const SignatureScreen({super.key});
 
@@ -66,12 +68,26 @@ class _SignatureScreenState extends State<SignatureScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: () => _controller.clear(),
-                  child: Text('Clear'),
+                  onPressed: _controller.clear,
+                  style: ButtonStyle(
+                    shape: WidgetStateProperty.all(CircleBorder()),
+                  ),
+                  child: Icon(
+                    Icons.close_rounded,
+                    size: 35,
+                    color: Colors.white,
+                  ).padAll(10),
                 ),
                 ElevatedButton(
                   onPressed: _saveSignature,
-                  child: Text('Save'),
+                  style: ButtonStyle(
+                    shape: WidgetStateProperty.all(CircleBorder()),
+                  ),
+                  child: Icon(
+                    Icons.done_rounded,
+                    size: 35,
+                    color: Colors.white,
+                  ).padAll(10),
                 ),
               ],
             ),
