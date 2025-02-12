@@ -1,6 +1,8 @@
 import 'package:sqflite/sqflite.dart';
 
 import '../../core/database/database_helper.dart';
+import '../../core/dto/api_request_dto.dart';
+import '../../core/network/api_endpoints.dart';
 import '../../core/network/api_manager.dart';
 import '../models/api_response.dart';
 import '../models/product.dart';
@@ -9,13 +11,14 @@ class ProductRepository {
   final ApiManager _apiManager = ApiManager();
   final DatabaseHelper _dbHelper = DatabaseHelper();
 
-  Future<ApiResponse<List<Product>>> fetchProducts() async {
+  Future<ApiResponse<List<Product>>> fetchProducts(
+      ApiRequestDTO requestDTO) async {
     try {
       final response = await _apiManager.post<List<Product>>(
-        "GetProducts",
-        fromJsonT: (data) => (data["GetProductsResult"] as List)
-            .map((e) => Product.fromJson(e))
-            .toList(),
+        ApiEndpoints.getProducts,
+        data: requestDTO.toJson(),
+        fromJsonT: (data) =>
+            (data as List).map((e) => Product.fromJson(e)).toList(),
       );
 
       if (response.success && response.data != null) {

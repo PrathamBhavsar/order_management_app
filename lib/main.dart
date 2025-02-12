@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'data/repositories/product_repository.dart';
+import 'domain/usecases/remote/remote_product_usecases.dart';
 import 'presentation/providers/customer_provider.dart';
 import 'domain/usecases/remote/remote_customer_usecases.dart';
 import 'data/repositories/customer_repository.dart';
-import 'presentation/screens/customer_screen.dart';
+import 'presentation/providers/product_provider.dart';
+import 'presentation/screens/product_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,15 +18,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MultiProvider(
         providers: [
-          ChangeNotifierProvider(
-            create: (_) => CustomerProvider(
-              GetCustomersUseCase(CustomerRepository()),
+          MultiProvider(providers: [
+            ChangeNotifierProvider(
+              create: (_) => CustomerProvider(
+                GetCustomersUseCase(
+                  CustomerRepository(),
+                ),
+              ),
             ),
-          ),
+            ChangeNotifierProvider(
+              create: (_) => ProductProvider(
+                GetProductsUseCase(
+                  ProductRepository(),
+                ),
+              ),
+            ),
+          ])
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: CustomerScreen(),
+          home: ProductScreen(),
         ),
       );
 }
