@@ -40,6 +40,8 @@ dependencies:
   dio: ^5.8.0+1
   json_serializable: ^6.9.3
   logger: ^2.5.0
+  signature: ^5.5.0
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:

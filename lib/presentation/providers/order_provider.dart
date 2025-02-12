@@ -12,7 +12,7 @@ class OrderProvider extends ChangeNotifier {
   List<ProductEntity> _products = [];
   List<String> _categories = [];
 
-  final List<Map<String, dynamic>> _orderItems = [];
+  final Map<ProductEntity, int> _orderItems = {};
 
   CustomerEntity? get selectedCustomer => _selectedCustomer;
   ProductEntity? get selectedProduct => _selectedProduct;
@@ -22,7 +22,7 @@ class OrderProvider extends ChangeNotifier {
   List<CustomerEntity> get customers => _customers;
   List<ProductEntity> get products => _products;
   List<String> get categories => _categories;
-  List<Map<String, dynamic>> get orderItems => _orderItems;
+  Map<ProductEntity, int> get orderItems => _orderItems;
 
   void setCustomers(List<CustomerEntity> newCustomers) {
     _customers = newCustomers;
@@ -60,17 +60,30 @@ class OrderProvider extends ChangeNotifier {
   }
 
   void addOrderItem() {
-    if (_selectedProduct != null && _selectedQuantity > 0) {
-      _orderItems.add({
-        "name": _selectedProduct!.name,
-        "qty": _selectedQuantity,
-      });
+    if (_selectedProduct != null) {
+      if (_orderItems.containsKey(_selectedProduct)) {
+        _orderItems[_selectedProduct!] =
+            _orderItems[_selectedProduct]! + _selectedQuantity;
+      } else {
+        _orderItems[_selectedProduct!] = _selectedQuantity;
+      }
       notifyListeners();
     }
   }
 
-  void removeOrderItem(String productName) {
-    _orderItems.removeWhere((item) => item["name"] == productName);
+  void subtractItemQty(ProductEntity product) {
+    if (_orderItems.containsKey(product)) {
+      if (_orderItems[product]! > 1) {
+        _orderItems[product] = _orderItems[product]! - 1;
+      } else {
+        _orderItems.remove(product);
+      }
+      notifyListeners();
+    }
+  }
+
+  void removeOrderItem(ProductEntity product) {
+    _orderItems.remove(product);
     notifyListeners();
   }
 

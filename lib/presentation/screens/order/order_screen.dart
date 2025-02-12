@@ -7,6 +7,7 @@ import '../../providers/category_provider.dart';
 import '../../providers/customer_provider.dart';
 import '../../providers/order_provider.dart';
 import '../../providers/product_provider.dart';
+import '../order_details_screen.dart';
 import 'widgets/custom_button.dart';
 import 'widgets/custom_dropdown.dart';
 import 'widgets/product_list.dart';
@@ -29,8 +30,12 @@ class _OrderScreenState extends State<OrderScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text("Add Order")),
       floatingActionButton: FloatingActionButton(
-        onPressed: productProvider.fetchProducts,
-        child: const Icon(Icons.refresh),
+        onPressed: () => Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => OrderDetailsScreen(),
+          ),
+        ),
+        child: const Icon(Icons.done_rounded),
       ),
       body: Column(
         children: [
@@ -69,7 +74,6 @@ class _OrderScreenState extends State<OrderScreen> {
                     onChanged: provider.setSelectedProduct,
                   ),
                 ),
-
                 20.hGap,
 
                 ///
@@ -93,18 +97,13 @@ class _OrderScreenState extends State<OrderScreen> {
                     5.wGap,
                     CustomButton(
                       text: 'ADD',
-                      onPressed: () {
-                        provider.addOrderItem();
-                      },
+                      onPressed: () => provider.addOrderItem(),
                     ),
                     CustomButton(
                       text: 'SUB',
                       onPressed: () {
-                        int currentQty = int.tryParse(_qtyController.text) ?? 1;
-                        if (currentQty > 1) {
-                          int newQty = currentQty - 1;
-                          _qtyController.text = newQty.toString();
-                          provider.setSelectedQuantity(newQty);
+                        if (provider.selectedProduct != null) {
+                          provider.subtractItemQty(provider.selectedProduct!);
                         }
                       },
                     ),
@@ -112,8 +111,7 @@ class _OrderScreenState extends State<OrderScreen> {
                       text: 'REM',
                       onPressed: () {
                         if (provider.selectedProduct != null) {
-                          provider
-                              .removeOrderItem(provider.selectedProduct!.name);
+                          provider.removeOrderItem(provider.selectedProduct!);
                         }
                       },
                     ),

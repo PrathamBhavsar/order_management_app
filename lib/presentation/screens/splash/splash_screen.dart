@@ -19,7 +19,6 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _fetchData();
-      // _fetchCategories();
     });
   }
 

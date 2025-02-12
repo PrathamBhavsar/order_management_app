@@ -8,7 +8,7 @@ class ProductListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Consumer<OrderProvider>(
         builder: (context, orderProvider, child) {
-          final products = orderProvider.orderItems;
+          final orderItems = orderProvider.orderItems.entries.toList();
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,14 +34,16 @@ class ProductListWidget extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: products.isEmpty
+                child: orderItems.isEmpty
                     ? const Center(child: Text("No products yet"))
                     : ListView.separated(
-                        itemCount: products.length,
+                        itemCount: orderItems.length,
                         separatorBuilder: (context, index) =>
                             const Divider(height: 1),
                         itemBuilder: (context, index) {
-                          final product = products[index];
+                          final product = orderItems[index].key;
+                          final quantity = orderItems[index].value;
+
                           return Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 16),
@@ -50,12 +52,12 @@ class ProductListWidget extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    product["name"],
+                                    product.name,
                                     style: const TextStyle(fontSize: 16),
                                   ),
                                 ),
                                 Text(
-                                  product["qty"].toString(),
+                                  quantity.toString(),
                                   style: const TextStyle(fontSize: 16),
                                 ),
                               ],
