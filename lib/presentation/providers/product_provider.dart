@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../../core/constants/constants.dart';
 import '../../core/dto/api_request_dto.dart';
 import '../../domain/entities/product_entity.dart';
-import '../../domain/usecases/local/local_product_usecases.dart';
-import '../../domain/usecases/remote/remote_product_usecases.dart';
+import '../../domain/use_cases/local/local_product_use_cases.dart';
+import '../../domain/use_cases/remote/remote_product_use_cases.dart';
 
 class ProductProvider extends ChangeNotifier {
   final GetRemoteProductsUseCase _getRemoteProductsUseCase;
@@ -40,5 +40,6 @@ class ProductProvider extends ChangeNotifier {
 
     _isLoading = false;
     notifyListeners();
+    print(_products.length);
   }
 }

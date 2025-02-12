@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/product_provider.dart';
+import '../../providers/product_provider.dart';
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({super.key});
@@ -14,15 +14,15 @@ class ProductScreen extends StatelessWidget {
       body: provider.isLoading
           ? Center(child: CircularProgressIndicator())
           : ListView.builder(
-        itemCount: provider.products.length,
-        itemBuilder: (context, index) {
-          final product = provider.products[index];
-          return ListTile(
-            title: Text(product.name),
-            subtitle: Text(product.productCategory),
-          );
-        },
-      ),
+              itemCount: provider.products.length,
+              itemBuilder: (context, index) {
+                final product = provider.products[index];
+                return ListTile(
+                  title: Text(product.name),
+                  subtitle: Text(product.productCategory),
+                );
+              },
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: provider.fetchProducts,
         child: Icon(Icons.refresh),

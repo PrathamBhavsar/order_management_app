@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/customer_provider.dart';
+import '../../providers/customer_provider.dart';
 
 class CustomerScreen extends StatelessWidget {
   const CustomerScreen({super.key});

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../dto/api_request_dto.dart';
 
 abstract class AppConstants {
@@ -19,4 +21,8 @@ abstract class AppConstants {
     appVersionNo: "1.0",
     deviceDate: "/Date(1720768210-600)/",
   );
+}
+
+abstract class AppColors {
+  static const Color primary = Color(0xfff84434);
 }
