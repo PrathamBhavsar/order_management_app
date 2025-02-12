@@ -23,6 +23,8 @@ class DatabaseHelper {
             contactName TEXT NOT NULL,
             email TEXT,
             telephone TEXT,
+            telephone2 TEXT,
+            fax TEXT,
             countryCode TEXT,
             address1 TEXT,
             address2 TEXT,

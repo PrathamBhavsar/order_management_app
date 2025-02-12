@@ -29,9 +29,25 @@ class ApiResponse<T> {
   static ApiResponse<T> fromDioResponse<T>(
       Response response, T Function(dynamic) fromJsonT) {
     try {
-      final Map<String, dynamic> json = jsonDecode(response.data);
+      final json =
+          response.data is String ? jsonDecode(response.data) : response.data;
 
-      return ApiResponse<T>.fromJson(json, fromJsonT);
+      //get first key
+      if (json is Map<String, dynamic> && json.isNotEmpty) {
+        final firstKey = json.keys.first;
+        final extractedData = json[firstKey];
+
+        if (extractedData is List) {
+          return ApiResponse<T>.fromJson({"data": extractedData}, fromJsonT);
+        }
+      }
+
+      return ApiResponse<T>(
+        success: false,
+        statusCode: response.statusCode ?? 500,
+        message: "Unexpected response format",
+        data: null,
+      );
     } catch (e) {
       LogService().logMessage("Error parsing response: $e");
       return ApiResponse<T>(
