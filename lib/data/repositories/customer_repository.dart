@@ -38,6 +38,7 @@ class CustomerRepository {
   Future<void> _storeCustomersInDB(List<Customer> customers) async {
     var db = await _dbHelper.database;
     for (var customer in customers) {
+      print(customer.toJson());
       await db.insert(
         "customers",
         customer.toJson(),
