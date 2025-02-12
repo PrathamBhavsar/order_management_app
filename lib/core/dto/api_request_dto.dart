@@ -53,11 +53,14 @@ class ApiRequestDTO {
           "Role": role,
           if (isResetSync != null) "IsResetSync": isResetSync,
         },
-        "syncDate": syncDate,
+        "syncDate": formatDate(syncDate),
         "pageIndex": pageIndex,
         "appVersionNo": appVersionNo,
-        "deviceDate": deviceDate,
+        "deviceDate": formatDate(deviceDate),
       };
+
+  String formatDate(String date) =>
+      date.startsWith("/Date(") ? date : '/Date($date-600)/';
 
   /// Factory method to create an instance from JSON
   factory ApiRequestDTO.fromJson(Map<String, dynamic> json) {

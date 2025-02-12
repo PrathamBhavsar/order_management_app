@@ -36,8 +36,9 @@ class ApiManager {
     try {
       Response response = await _dio.post(
         url,
-        options: options,
-        data: FormData.fromMap(data ?? {}),
+        options:
+            options ?? Options(headers: {"Content-Type": "application/json"}),
+        data: data,
         queryParameters: queryParameters,
       );
 
