@@ -3,10 +3,10 @@ import '../../../data/models/api_response.dart';
 import '../../../data/repositories/customer_repository.dart';
 import '../../entities/customer_entity.dart';
 
-class GetCustomersUseCase {
+class GetRemoteCustomersUseCase {
   final CustomerRepository repository;
 
-  GetCustomersUseCase(this.repository);
+  GetRemoteCustomersUseCase(this.repository);
 
   Future<ApiResponse<List<CustomerEntity>>> execute(
       ApiRequestDTO requestDTO) async {

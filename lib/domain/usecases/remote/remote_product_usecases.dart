@@ -3,14 +3,13 @@ import '../../../data/models/api_response.dart';
 import '../../../data/repositories/product_repository.dart';
 import '../../entities/product_entity.dart';
 
-class GetProductsUseCase {
+class GetRemoteProductsUseCase {
   final ProductRepository repository;
 
-  GetProductsUseCase(this.repository);
+  GetRemoteProductsUseCase(this.repository);
 
   Future<ApiResponse<List<ProductEntity>>> execute(
-      ApiRequestDTO requestDTO
-      ) async {
+      ApiRequestDTO requestDTO) async {
     final response = await repository.fetchProducts(requestDTO);
 
     if (response.success && response.data != null) {

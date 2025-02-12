@@ -5,7 +5,7 @@ import '../../domain/usecases/remote/remote_customer_usecases.dart';
 import '../../domain/entities/customer_entity.dart';
 
 class CustomerProvider extends ChangeNotifier {
-  final GetCustomersUseCase _getCustomersUseCase;
+  final GetRemoteCustomersUseCase _getCustomersUseCase;
 
   List<CustomerEntity> _customers = [];
   List<CustomerEntity> get customers => _customers;

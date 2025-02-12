@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'data/repositories/product_repository.dart';
+import 'domain/usecases/local/local_product_usecases.dart';
 import 'domain/usecases/remote/remote_product_usecases.dart';
 import 'presentation/providers/customer_provider.dart';
 import 'domain/usecases/remote/remote_customer_usecases.dart';
@@ -21,14 +22,17 @@ class MyApp extends StatelessWidget {
           MultiProvider(providers: [
             ChangeNotifierProvider(
               create: (_) => CustomerProvider(
-                GetCustomersUseCase(
+                GetRemoteCustomersUseCase(
                   CustomerRepository(),
                 ),
               ),
             ),
             ChangeNotifierProvider(
               create: (_) => ProductProvider(
-                GetProductsUseCase(
+                GetRemoteProductsUseCase(
+                  ProductRepository(),
+                ),
+                GetLocalProductsUseCase(
                   ProductRepository(),
                 ),
               ),
