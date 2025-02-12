@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import '../../data/models/api_response.dart';
 import 'package:flutter/material.dart';
+import '../constants/constants.dart';
 import 'api_endpoints.dart';
 
 class ApiManager {
@@ -30,7 +31,6 @@ class ApiManager {
     String url, {
     Map<String, dynamic>? queryParameters,
     Options? options,
-    Map<String, dynamic>? data,
     required T Function(dynamic) fromJsonT,
   }) async {
     try {
@@ -38,7 +38,7 @@ class ApiManager {
         url,
         options:
             options ?? Options(headers: {"Content-Type": "application/json"}),
-        data: data,
+        data: AppConstants.requestDTO.toJson(),
         queryParameters: queryParameters,
       );
 

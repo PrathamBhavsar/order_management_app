@@ -70,6 +70,13 @@ class DatabaseHelper {
             ProductVatId INTEGER
           )
         ''');
+
+        await db.execute('''
+          CREATE TABLE categories (
+            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+            Name TEXT UNIQUE
+          )
+        ''');
       },
     );
   }
@@ -92,6 +99,15 @@ class DatabaseHelper {
     );
   }
 
+  Future<void> insertOrUpdateCategory(Map<String, dynamic> category) async {
+    final db = await database;
+    await db.insert(
+      'categories',
+      category,
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
   Future<List<Map<String, dynamic>>> getCustomers() async {
     final db = await database;
     return await db.query('customers');
@@ -102,6 +118,11 @@ class DatabaseHelper {
     return await db.query('products');
   }
 
+  Future<List<Map<String, dynamic>>> getCategories() async {
+    final db = await database;
+    return await db.query('categories');
+  }
+
   Future<void> deleteAllCustomers() async {
     final db = await database;
     await db.delete('customers');
@@ -110,5 +131,10 @@ class DatabaseHelper {
   Future<void> deleteAllProducts() async {
     final db = await database;
     await db.delete('products');
+  }
+
+  Future<void> deleteAllCategories() async {
+    final db = await database;
+    await db.delete('categories');
   }
 }

@@ -15,7 +15,6 @@ class CustomerRepository {
     try {
       final response = await _apiManager.post<List<Customer>>(
         ApiEndpoints.getCustomers,
-        data: requestDTO.toJson(),
         fromJsonT: (data) =>
             (data as List).map((e) => Customer.fromJson(e)).toList(),
       );

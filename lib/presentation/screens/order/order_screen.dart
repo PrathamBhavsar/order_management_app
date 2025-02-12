@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../../core/extensions/app_paddings.dart';
 import '../../../domain/entities/customer_entity.dart';
 import '../../../domain/entities/product_entity.dart';
+import '../../providers/category_provider.dart';
 import '../../providers/customer_provider.dart';
 import '../../providers/order_provider.dart';
 import '../../providers/product_provider.dart';
@@ -40,8 +41,7 @@ class _OrderScreenState extends State<OrderScreen> {
                   builder: (context, customerProvider, child) =>
                       CustomDropdown<CustomerEntity>(
                     label: "Select Customer",
-                    items: customerProvider
-                        .customers, // Directly use CustomerProvider's list
+                    items: customerProvider.customers,
                     itemLabel: (customer) => customer.name,
                     selectedItem:
                         context.watch<OrderProvider>().selectedCustomer,
@@ -49,21 +49,22 @@ class _OrderScreenState extends State<OrderScreen> {
                         context.read<OrderProvider>().setSelectedCustomer,
                   ),
                 ),
-
-                CustomDropdown<String>(
-                  label: "Select Category",
-                  items: provider.categories,
-                  itemLabel: (category) => category,
-                  selectedItem: provider.selectedCategory,
-                  onChanged: provider.setSelectedCategory,
-                ).padSymmetric(vertical: 20),
-
+                Consumer<CategoryProvider>(
+                  builder: (context, categoryProvider, child) =>
+                      CustomDropdown<String>(
+                    label: "Select Category",
+                    items: categoryProvider.categories,
+                    itemLabel: (category) => category,
+                    selectedItem: provider.selectedCategory,
+                    onChanged: provider.setSelectedCategory,
+                  ).padSymmetric(vertical: 20),
+                ),
                 Consumer<ProductProvider>(
                   builder: (context, productProvider, child) =>
                       CustomDropdown<ProductEntity>(
                     label: "Select Product",
                     items: productProvider.products,
-                    itemLabel: (customer) => customer.name,
+                    itemLabel: (product) => product.name,
                     selectedItem: provider.selectedProduct,
                     onChanged: provider.setSelectedProduct,
                   ),

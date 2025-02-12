@@ -39,6 +39,5 @@ class CustomerProvider extends ChangeNotifier {
 
     _isLoading = false;
     notifyListeners();
-    print(_customers.length);
   }
 }

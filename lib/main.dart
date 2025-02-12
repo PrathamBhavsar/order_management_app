@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'core/constants/constants.dart';
+import 'data/repositories/category_repository.dart';
 import 'data/repositories/product_repository.dart';
+import 'domain/use_cases/local/local_category_use_cases.dart';
 import 'domain/use_cases/local/local_customer_use_cases.dart';
 import 'domain/use_cases/local/local_product_use_cases.dart';
+import 'domain/use_cases/remote/remote_category_use_cases.dart';
 import 'domain/use_cases/remote/remote_product_use_cases.dart';
+import 'presentation/providers/category_provider.dart';
 import 'presentation/providers/customer_provider.dart';
 import 'domain/use_cases/remote/remote_customer_use_cases.dart';
 import 'data/repositories/customer_repository.dart';
@@ -40,6 +44,16 @@ class MyApp extends StatelessWidget {
                 ),
                 GetLocalProductsUseCase(
                   ProductRepository(),
+                ),
+              ),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => CategoryProvider(
+                GetRemoteCategoriesUseCase(
+                  CategoryRepository(),
+                ),
+                GetLocalCategoriesUseCase(
+                  CategoryRepository(),
                 ),
               ),
             ),

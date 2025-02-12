@@ -16,7 +16,6 @@ class ProductRepository {
     try {
       final response = await _apiManager.post<List<Product>>(
         ApiEndpoints.getProducts,
-        data: requestDTO.toJson(),
         fromJsonT: (data) =>
             (data as List).map((e) => Product.fromJson(e)).toList(),
       );
