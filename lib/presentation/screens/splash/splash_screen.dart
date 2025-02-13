@@ -22,15 +22,6 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-  Future<void> _fetchCategories() async {
-    final categoryProvider =
-        Provider.of<CategoryProvider>(context, listen: false);
-
-    await Future.wait([
-      categoryProvider.fetchCategories(),
-    ]);
-  }
-
   Future<void> _fetchData() async {
     final productProvider =
         Provider.of<ProductProvider>(context, listen: false);

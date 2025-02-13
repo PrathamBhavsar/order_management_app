@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import '../../domain/entities/customer_entity.dart';
 import '../../domain/entities/product_entity.dart';
@@ -92,6 +95,15 @@ class OrderProvider extends ChangeNotifier {
     _selectedProduct = null;
     _selectedCategory = null;
     _selectedQuantity = 1;
+    notifyListeners();
+  }
+
+  String? signaturePath;
+  Uint8List? signatureBytes;
+
+  void setSignaturePath(String filePath) async {
+    signaturePath = filePath;
+    signatureBytes = await File(filePath).readAsBytes();
     notifyListeners();
   }
 }

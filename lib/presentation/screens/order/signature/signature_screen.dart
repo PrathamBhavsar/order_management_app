@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:signature/signature.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:typed_data';
 import 'dart:io';
 
-import '../../core/extensions/app_paddings.dart';
+import '../../../../core/extensions/app_paddings.dart';
+import '../../../providers/order_provider.dart';
 
 class SignatureScreen extends StatefulWidget {
   const SignatureScreen({super.key});
@@ -33,9 +35,11 @@ class _SignatureScreenState extends State<SignatureScreen> {
         final filePath = '$path/signature.png';
         final file = File(filePath);
         await file.writeAsBytes(data);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Signature saved at: $filePath')),
-        );
+
+        final orderProvider =
+            Provider.of<OrderProvider>(context, listen: false);
+        orderProvider.setSignaturePath(filePath);
+        Navigator.pop(context);
       }
     }
   }

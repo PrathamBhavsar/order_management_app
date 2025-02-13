@@ -40,6 +40,5 @@ class ProductProvider extends ChangeNotifier {
 
     _isLoading = false;
     notifyListeners();
-    print(_products.length);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../../core/extensions/app_paddings.dart';
 import '../../../providers/order_provider.dart';
 
 class ProductListWidget extends StatelessWidget {
@@ -15,8 +16,6 @@ class ProductListWidget extends StatelessWidget {
             children: [
               Container(
                 color: Colors.grey[800],
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
@@ -31,7 +30,7 @@ class ProductListWidget extends StatelessWidget {
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ],
-                ),
+                ).padSymmetric(vertical: 12, horizontal: 12),
               ),
               Expanded(
                 child: orderItems.isEmpty

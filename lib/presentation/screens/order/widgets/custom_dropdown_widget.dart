@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/extensions/app_paddings.dart';
+
 class CustomDropdown<T> extends StatelessWidget {
   final String label;
   final List<T> items;
@@ -24,10 +26,10 @@ class CustomDropdown<T> extends StatelessWidget {
             label,
             style: const TextStyle(
               fontSize: 16,
-              fontWeight: FontWeight.bold,
+              color: Colors.black38,
             ),
           ),
-          const SizedBox(height: 8),
+          8.hGap,
           DropdownButtonFormField<T>(
             value: selectedItem,
             decoration: InputDecoration(

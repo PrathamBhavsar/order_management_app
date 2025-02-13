@@ -14,8 +14,6 @@ import 'domain/use_cases/remote/remote_customer_use_cases.dart';
 import 'data/repositories/customer_repository.dart';
 import 'presentation/providers/order_provider.dart';
 import 'presentation/providers/product_provider.dart';
-import 'presentation/screens/order_details_screen.dart';
-import 'presentation/screens/signature_screen.dart';
 import 'presentation/screens/splash/splash_screen.dart';
 
 void main() {
@@ -88,15 +86,20 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
-            inputDecorationTheme:
-                InputDecorationTheme(border: UnderlineInputBorder()),
+            inputDecorationTheme: InputDecorationTheme(
+              border: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: AppColors.primary,
+                ),
+              ),
+            ),
             floatingActionButtonTheme: FloatingActionButtonThemeData(
               backgroundColor: AppColors.primary,
               foregroundColor: Colors.white,
             ),
           ),
           debugShowCheckedModeBanner: false,
-          home: SignatureScreen(),
+          home: SplashScreen(),
         ),
       );
 }
